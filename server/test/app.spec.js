@@ -1,10 +1,12 @@
+const supertest = require('supertest');
 const app = require('../src/app');
+const songs = require('../songData.json');
 
 describe('App', () => {
-  it('GET / responds with 200 containing "Hello, world!"', () => {
+  it('GET /songs responds with 200 and all songs', () => {
     return supertest(app)
-      .get('/')
-      .expect(200, 'Hello, boilerplate!');
+      .get('/songs')
+      .expect(200, songs);
   });
 });
 
