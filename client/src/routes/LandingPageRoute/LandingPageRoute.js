@@ -1,6 +1,8 @@
+import './LandingPageRoute.css';
+
 function LandingPageRoute() {
   return (
-    <h2>Landing Page</h2>
+    <h2>Home</h2>
   );
 }
 
