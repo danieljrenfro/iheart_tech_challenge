@@ -8,6 +8,10 @@
   color: #919395;
 }
 
+.details > ul {
+  margin-bottom: 32px;
+}
+
 .column-headers {
   display: flex;
   justify-content: center;

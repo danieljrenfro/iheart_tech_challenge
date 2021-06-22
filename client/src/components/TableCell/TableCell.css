@@ -1,8 +1,8 @@
 .cell {
   width: 5%;
   padding: 3px;
-  margin: 0;
-  border-right: #101820 0.5px solid;
+  margin: 0px;
+  border-right: #101820 1px solid;
   overflow: hidden;
   white-space: nowrap;
 }
@@ -11,7 +11,8 @@
   border-right: none;
 }
 
-.cell:first-of-type, .cell:nth-of-type(2) {
+.cell:first-of-type, 
+.cell:nth-of-type(2) { 
   width: 15%;
 }
 

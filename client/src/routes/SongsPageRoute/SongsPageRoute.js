@@ -36,42 +36,33 @@ function SongsPageRoute() {
     // no sort
     if (order === 'no sort') {
       setSongs([...originalSort]);
-    }
-  
-    // ascending sort
-    if (order === 'asc') {
-      let ascSort = [...songs].sort((a, b) => {
+    } else {
+      let sortedSongs = [...songs].sort((a, b) => {
         const fieldA = (typeof a[header] === 'string') ? a[header].toUpperCase() : a[header];
         const fieldB = (typeof b[header] === 'string') ? b[header].toUpperCase() : b[header];
-        console.log('fieldA', fieldA, 'fieldB', fieldB)
+        
+        if (order === 'asc') {
+          if (fieldA > fieldB)
+            return -1;
+    
+          if (fieldA < fieldB)
+            return 1;
+    
+          return 0;
+        }
   
-        if (fieldA > fieldB)
-          return -1;
-  
-        if (fieldA < fieldB)
-          return 1;
-  
-        return 0;
+        if (order === 'desc') {
+          if (fieldA > fieldB)
+            return 1;
+    
+          if (fieldA < fieldB)
+            return -1
+    
+          return 0;
+        }  
       })
-      return setSongs(ascSort);
-    }
-  
-    // descending sort
-    if (order === 'desc') {
-      let descSort = [...songs].sort((a, b) => {
-        const fieldA = (typeof a[header] === 'string') ? a[header].toUpperCase() : a[header];
-        const fieldB = (typeof b[header] === 'string') ? b[header].toUpperCase() : b[header];
-  
-        if (fieldA > fieldB)
-          return 1;
-  
-        if (fieldA < fieldB)
-          return -1
-  
-        return 0;
-      })
-  
-      return setSongs(descSort);
+      
+      setSongs(sortedSongs);
     }
   }
 

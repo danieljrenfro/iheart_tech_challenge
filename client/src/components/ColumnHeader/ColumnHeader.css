@@ -1,24 +1,6 @@
 .column-header {
-  width: 5%;
   color: #919395;
   font-size: 15px;
-  border-right: #101820 1px solid;
-  padding: 3px;
-  margin: 0px;
   cursor: pointer;
-  overflow: hidden;
-  white-space: nowrap;
   text-align: center;
-}
-
-.column-header:last-of-type {
-  border-right: none;
-}
-
-.column-header:first-of-type, .column-header:nth-of-type(2) {
-  width: 15%;
-}
-
-.column-header:nth-of-type(3) {
-  width: 10%;
 }
