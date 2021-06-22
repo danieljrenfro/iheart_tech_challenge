@@ -7,3 +7,8 @@
 .details > p, li {
   color: #919395;
 }
+
+.column-headers {
+  display: flex;
+  justify-content: center;
+}

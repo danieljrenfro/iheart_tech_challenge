@@ -21,6 +21,4 @@ a:hover {
   color: #919395;
   transition: all 0.2s ease;
 }
-a:active {
-  color: #606366;
-}
+a:active { color: #606366; }

@@ -1,0 +1,13 @@
+.column-header {
+  color: #919395;
+  font-size: 15px;
+  border: #101820 0.5px solid;
+  border-right: none;
+  padding: 5px 20px 5px 20px;
+  margin: 0px;
+  cursor: pointer;
+}
+
+.column-header:last-of-type {
+  border-right: #101820 0.5px solid;
+}
