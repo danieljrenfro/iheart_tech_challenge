@@ -35,7 +35,7 @@ function SongsPageRoute() {
   const sortSongs = (header, order) => {
     // no sort
     if (order === 'no sort') {
-      setSongs(       originalSort);
+      setSongs(originalSort);
     } else {
       let sortedSongs = [...songs].sort((a, b) => {
         const fieldA = (typeof a[header] === 'string') ? a[header].toUpperCase() : a[header];
@@ -56,24 +56,14 @@ function SongsPageRoute() {
 
   // handling the header click and updating sortBy state
   const onHeaderClick = (header) => {
-    if (sortBy !== header) {
-      setSortBy(header);
-      setOrderBy('asc');
-      sortSongs(header, 'asc');
-    } else {
-      if (orderBy === 'asc') {
-        setOrderBy('desc');
-        sortSongs(header, 'desc');
-      }
-      if (orderBy === 'desc') {
-        setOrderBy('no sort');
-        sortSongs(header, 'no sort');
-      }
-      if (orderBy === 'no sort') {
-        setOrderBy('asc');
-        sortSongs(header, 'asc');
-      }
-    }
+    let sortOrder = 'asc';
+
+    if (sortBy !== header) setSortBy(header);
+    if (orderBy === 'asc') sortOrder = 'desc';
+    if (orderBy === 'desc') sortOrder = 'no sort';
+
+    setOrderBy(sortOrder);
+    sortSongs(header, sortOrder);
   }
   
 
