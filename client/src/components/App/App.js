@@ -9,6 +9,9 @@ import Header from '../Header/Header';
 import LandingPageRoute from '../../routes/LandingPageRoute/LandingPageRoute';
 import SongsPageRoute from '../../routes/SongsPageRoute/SongsPageRoute';
 
+// Styles
+import './App.css';
+
 function App() {
   return (
     <div className="App">
@@ -20,8 +23,7 @@ function App() {
             path={'/'}
             component={LandingPageRoute}
           />
-          <Route 
-            exact
+          <Route
             path={'/songs'}
             component={SongsPageRoute}
           />
