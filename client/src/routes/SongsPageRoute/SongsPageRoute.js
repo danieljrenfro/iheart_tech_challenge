@@ -35,31 +35,19 @@ function SongsPageRoute() {
   const sortSongs = (header, order) => {
     // no sort
     if (order === 'no sort') {
-      setSongs([...originalSort]);
+      setSongs(       originalSort);
     } else {
       let sortedSongs = [...songs].sort((a, b) => {
         const fieldA = (typeof a[header] === 'string') ? a[header].toUpperCase() : a[header];
         const fieldB = (typeof b[header] === 'string') ? b[header].toUpperCase() : b[header];
         
-        if (order === 'asc') {
-          if (fieldA > fieldB)
-            return -1;
-    
-          if (fieldA < fieldB)
-            return 1;
-    
-          return 0;
-        }
+        if (fieldA > fieldB)
+          return (order === 'asc') ? -1 : 1;
   
-        if (order === 'desc') {
-          if (fieldA > fieldB)
-            return 1;
-    
-          if (fieldA < fieldB)
-            return -1
-    
-          return 0;
-        }  
+        if (fieldA < fieldB)
+          return (order === 'asc') ? 1 : -1;
+  
+        return 0;
       })
       
       setSongs(sortedSongs);
@@ -97,18 +85,20 @@ function SongsPageRoute() {
         key={i} 
         title={key} 
         handleClick={onHeaderClick}
+        orderBy={orderBy}
+        sortBy={sortBy}
       />;
     })
   }
 
   // generate song rows
-  let tableRows;
+  let tableRows
   if (songs.length > 0) {
     tableRows = songs.map((song, i) => {
       return <TableRow
-      key={i}  
-      line={i}
-      song={song}
+        key={i}  
+        line={i}
+        song={song}
       />
     })
   }
@@ -125,8 +115,8 @@ function SongsPageRoute() {
         </ul>
       </section>
       <section className='songs-table'>
-        {songs.length === 0 ? <p>Loading songs...</p> : <></>}
-        {error ? <p>{error}</p> : <></>}
+        {songs.length === 0 ? <p>Loading songs...</p> : null}
+        {error ? <p>{error}</p> : null}
 
         <div className="column-headers">
           {columnHeaders}
