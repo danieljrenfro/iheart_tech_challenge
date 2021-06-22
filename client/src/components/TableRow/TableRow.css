@@ -1,0 +1,19 @@
+.row {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  border: #101820 0.5px solid;
+}
+
+.row {
+  border-top: none;
+}
+
+.light {
+  background-color: #496682;;
+}
+
+.dark {
+  color: #919395;
+  background-color: #274057;
+}

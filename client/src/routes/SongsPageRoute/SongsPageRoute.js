@@ -3,6 +3,7 @@ import config from '../../config';
 
 // Components
 import ColumnHeader from '../../components/ColumnHeader/ColumnHeader';
+import TableRow from '../../components/TableRow/TableRow';
 
 // Styles
 import './SongsPageRoute.css';
@@ -10,10 +11,10 @@ import './SongsPageRoute.css';
 function SongsPageRoute() {
   // state
   const [songs, setSongs] = useState([]);
+  const [originalSort, setOriginalSort] = useState([]);
   const [error, setError] = useState('');
   const [sortBy, setSortBy] = useState('');
   const [orderBy, setOrderBy] = useState('');
-  const [originalSort, setOriginalSort] = useState([]);
 
   // fetch request to API
   useEffect(() => {
@@ -30,26 +31,75 @@ function SongsPageRoute() {
       })
   }, []);
 
-  // handling the header click and updated sortBy state
+  // song sorting
+  const sortSongs = (header, order) => {
+    // no sort
+    if (order === 'no sort') {
+      setSongs([...originalSort]);
+    }
+  
+    // ascending sort
+    if (order === 'asc') {
+      let ascSort = [...songs].sort((a, b) => {
+        const fieldA = (typeof a[header] === 'string') ? a[header].toUpperCase() : a[header];
+        const fieldB = (typeof b[header] === 'string') ? b[header].toUpperCase() : b[header];
+        console.log('fieldA', fieldA, 'fieldB', fieldB)
+  
+        if (fieldA > fieldB)
+          return -1;
+  
+        if (fieldA < fieldB)
+          return 1;
+  
+        return 0;
+      })
+      return setSongs(ascSort);
+    }
+  
+    // descending sort
+    if (order === 'desc') {
+      let descSort = [...songs].sort((a, b) => {
+        const fieldA = (typeof a[header] === 'string') ? a[header].toUpperCase() : a[header];
+        const fieldB = (typeof b[header] === 'string') ? b[header].toUpperCase() : b[header];
+  
+        if (fieldA > fieldB)
+          return 1;
+  
+        if (fieldA < fieldB)
+          return -1
+  
+        return 0;
+      })
+  
+      return setSongs(descSort);
+    }
+  }
+
+  // handling the header click and updating sortBy state
   const onHeaderClick = (header) => {
     if (sortBy !== header) {
       setSortBy(header);
       setOrderBy('asc');
-      return;
-    }
-    
-    if (sortBy === header) {
-      if (orderBy === '') setOrderBy('asc');
-      if (orderBy === 'asc') setOrderBy('desc');
-      if (orderBy === 'desc') setOrderBy('no sort');
+      sortSongs(header, 'asc');
+    } else {
+      if (orderBy === 'asc') {
+        setOrderBy('desc');
+        sortSongs(header, 'desc');
+      }
+      if (orderBy === 'desc') {
+        setOrderBy('no sort');
+        sortSongs(header, 'no sort');
+      }
       if (orderBy === 'no sort') {
         setOrderBy('asc');
+        sortSongs(header, 'asc');
       }
     }
   }
+  
 
-  // generated column headers
-  let columnHeaders = '';
+  // generate column headers
+  let columnHeaders;
   if (songs.length > 0) {
     columnHeaders = Object.keys(songs[0]).map((key, i) => {
       return <ColumnHeader 
@@ -60,46 +110,17 @@ function SongsPageRoute() {
     })
   }
 
-  // song sorting
-  // no sort
-  if (sortBy && orderBy === 'no sort') {
-    setSongs([...originalSort]);
-    setOrderBy('');
-    setSortBy('');
-  }
-
-  // ascending sort
-  if (orderBy === 'asc') {
-    songs.sort((a, b) => {
-      const fieldA = a[sortBy].toUpperCase();
-      const fieldB = b[sortBy].toUpperCase();
-
-      if (fieldA > fieldB)
-        return -1;
-
-      if (fieldA < fieldB)
-        return 1;
-
-      return 0;
+  // generate song rows
+  let tableRows;
+  if (songs.length > 0) {
+    tableRows = songs.map((song, i) => {
+      return <TableRow
+      key={i}  
+      line={i}
+      song={song}
+      />
     })
   }
-
-  // descending sort
-  if (orderBy === 'desc') {
-    songs.sort((a, b) => {
-      const fieldA = a[sortBy].toUpperCase();
-      const fieldB = b[sortBy].toUpperCase();
-
-      if (fieldA > fieldB)
-        return 1;
-
-      if (fieldA < fieldB)
-        return -1
-
-      return 0;
-    })
-  }
-
 
   return (
     <>
@@ -115,8 +136,12 @@ function SongsPageRoute() {
       <section className='songs-table'>
         {songs.length === 0 ? <p>Loading songs...</p> : <></>}
         {error ? <p>{error}</p> : <></>}
+
         <div className="column-headers">
           {columnHeaders}
+        </div>
+        <div className='table-rows'>
+          {tableRows}
         </div>
       </section>
     </>

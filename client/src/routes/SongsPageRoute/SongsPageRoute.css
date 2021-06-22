@@ -11,4 +11,6 @@
 .column-headers {
   display: flex;
   justify-content: center;
+  width: 100%;
+  border: #101820 0.5px solid;
 }
