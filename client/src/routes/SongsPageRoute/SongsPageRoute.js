@@ -1,11 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import config from '../../config';
 
-// Components
 import ColumnHeader from '../../components/ColumnHeader/ColumnHeader';
 import TableRow from '../../components/TableRow/TableRow';
 
-// Styles
 import './SongsPageRoute.css';
 
 function SongsPageRoute() {
@@ -29,6 +27,9 @@ function SongsPageRoute() {
         setSongs([...songs]);
         setOriginalSort([...songs]);
       })
+      .catch(() => {
+        return setError('Could not load songs...');
+      })
   }, []);
 
   // song sorting
@@ -37,7 +38,7 @@ function SongsPageRoute() {
     if (order === 'no sort') {
       setSongs(originalSort);
     } else {
-      let sortedSongs = [...songs].sort((a, b) => {
+      const sortedSongs = [...songs].sort((a, b) => {
         const fieldA = (typeof a[header] === 'string') ? a[header].toUpperCase() : a[header];
         const fieldB = (typeof b[header] === 'string') ? b[header].toUpperCase() : b[header];
         
