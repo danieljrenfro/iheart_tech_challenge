@@ -5,8 +5,8 @@ import './TableRow.css';
 function TableRow(props) {
   let rowCells;
   if (props.song) {
-    rowCells = Object.values(props.song).map((attribute, i) => {
-      return <TableCell key={i} value={attribute}/>
+    rowCells = props.columnOrder.map((attribute, i) => {
+      return <TableCell key={i} value={props.song[attribute]}/>
     })
   }
   

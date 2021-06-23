@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 import config from '../../config';
 
 import ColumnHeader from '../../components/ColumnHeader/ColumnHeader';
@@ -13,6 +13,7 @@ function SongsPageRoute() {
   const [error, setError] = useState('');
   const [sortBy, setSortBy] = useState('');
   const [orderBy, setOrderBy] = useState('');
+  const [columnOrder, setColumnOrder] = useState([]);
 
   // fetch request to API
   useEffect(() => {
@@ -26,17 +27,19 @@ function SongsPageRoute() {
       .then(songs => {
         setSongs([...songs]);
         setOriginalSort([...songs]);
+        setColumnOrder(Object.keys(songs[0]))
       })
       .catch(() => {
         setError('Could not load songs...');
       })
   }, []);
 
+  
   function dateParser(date) {
     const parts = date.split('/');
     return new Date(parts[2], parts[1], parts[0]);
   }
-
+  
   // song sorting
   const sortSongs = (header, order) => {
     // no sort
@@ -45,7 +48,7 @@ function SongsPageRoute() {
     } else {
       const sortedSongs = [...songs].sort((a, b) => {
         let fieldA, fieldB;
-
+        
         if (header === 'songReleaseDate') {
           fieldA = dateParser(a[header]);
           fieldB = dateParser(b[header]);
@@ -53,59 +56,57 @@ function SongsPageRoute() {
           fieldA = (typeof a[header] === 'string') ? a[header].toUpperCase() : a[header];
           fieldB = (typeof b[header] === 'string') ? b[header].toUpperCase() : b[header];
         }
-
+        
         
         if (fieldA > fieldB)
-          return (order === 'asc') ? -1 : 1;
-  
+        return (order === 'asc') ? -1 : 1;
+        
         if (fieldA < fieldB)
-          return (order === 'asc') ? 1 : -1;
-  
+        return (order === 'asc') ? 1 : -1;
+        
         return 0;
       })
       
       setSongs(sortedSongs);
     }
   }
-
+  
   // handling the header click and updating sortBy state
   const onHeaderClick = (header) => {
     let sortOrder = 'asc';
-
+    
     if (sortBy !== header) setSortBy(header);
-
+    
     if (sortBy === header) {
       if (orderBy === 'asc') sortOrder = 'desc';
       if (orderBy === 'desc') sortOrder = 'no sort';
     }
-
+    
     setOrderBy(sortOrder);
     sortSongs(header, sortOrder);
   }
   
-
   // generate column headers
   let columnHeaders;
-  if (songs.length > 0) {
-    columnHeaders = Object.keys(songs[0]).map((key, i) => {
-      return <ColumnHeader 
-        key={i} 
-        title={key} 
-        handleClick={onHeaderClick}
-        orderBy={orderBy}
-        sortBy={sortBy}
-      />;
-    })
-  }
+  columnHeaders = columnOrder.map((key, i) => {
+    return <ColumnHeader
+      key={i}
+      title={key} 
+      handleClick={onHeaderClick}
+      orderBy={orderBy}
+      sortBy={sortBy}
+    />;
+  })
 
   // generate song rows
-  let tableRows
+  let tableRows;
   if (songs.length > 0) {
     tableRows = songs.map((song, i) => {
       return <TableRow
         key={i}  
         line={i}
         song={song}
+        columnOrder={columnOrder}
       />
     })
   }
