@@ -1,5 +1,6 @@
 .row {
   display: flex;
+  align-items: center;
   width: fit-content;
   height: 2.75vh;
   border: #101820 0.5px solid;

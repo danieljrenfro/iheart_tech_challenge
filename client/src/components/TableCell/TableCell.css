@@ -1,8 +1,9 @@
 .cell {
-  min-width: 125px;
+  min-width: 105px;
   padding: 5px;
   margin: 0px;
-  border-right: #101820 1px solid;
+  border-right: 1px solid #101820;
+  font-size: 80%;
 }
 
 .cell:last-of-type {
@@ -11,8 +12,8 @@
 
 .cell:first-of-type, 
 .cell:nth-of-type(2) { 
-  overflow-y: hidden;
-  min-width: 200px;
+  overflow: hidden;
+  min-width: 230px;
 }
 
 .cell:nth-of-type(3) {
