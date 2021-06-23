@@ -10,7 +10,7 @@ git clone https://github.com/danieljrenfro/iheart_tech_challenge.git
 
 Navigate to the server file and install dependencies:
 ```
-cd server/ && npm i
+cd iheart_tech_challenge/server/ && npm i
 ```
 
 Start the server:
