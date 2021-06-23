@@ -28,9 +28,14 @@ function SongsPageRoute() {
         setOriginalSort([...songs]);
       })
       .catch(() => {
-        return setError('Could not load songs...');
+        setError('Could not load songs...');
       })
   }, []);
+
+  function dateParser(date) {
+    const parts = date.split('/');
+    return new Date(parts[2], parts[1], parts[0]);
+  }
 
   // song sorting
   const sortSongs = (header, order) => {
@@ -39,8 +44,16 @@ function SongsPageRoute() {
       setSongs(originalSort);
     } else {
       const sortedSongs = [...songs].sort((a, b) => {
-        const fieldA = (typeof a[header] === 'string') ? a[header].toUpperCase() : a[header];
-        const fieldB = (typeof b[header] === 'string') ? b[header].toUpperCase() : b[header];
+        let fieldA, fieldB;
+
+        if (header === 'songReleaseDate') {
+          fieldA = dateParser(a[header]);
+          fieldB = dateParser(b[header]);
+        } else {
+          fieldA = (typeof a[header] === 'string') ? a[header].toUpperCase() : a[header];
+          fieldB = (typeof b[header] === 'string') ? b[header].toUpperCase() : b[header];
+        }
+
         
         if (fieldA > fieldB)
           return (order === 'asc') ? -1 : 1;
@@ -60,8 +73,11 @@ function SongsPageRoute() {
     let sortOrder = 'asc';
 
     if (sortBy !== header) setSortBy(header);
-    if (orderBy === 'asc' && sortBy === header) sortOrder = 'desc';
-    if (orderBy === 'desc' && sortBy === header) sortOrder = 'no sort';
+
+    if (sortBy === header) {
+      if (orderBy === 'asc') sortOrder = 'desc';
+      if (orderBy === 'desc') sortOrder = 'no sort';
+    }
 
     setOrderBy(sortOrder);
     sortSongs(header, sortOrder);
