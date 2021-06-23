@@ -113,12 +113,7 @@ function SongsPageRoute() {
 
   return (
     <>
-      <section className='details'>
-        <h2>Songs Page</h2>
-        <p>This is the Songs Table, where you can view all of the song data. Clicking the headers of different columns will sort the songs by that column.</p>
-        
-        {songs.length === 0 ? <p>Loading songs...</p> : null}
-      </section>
+      {songs.length === 0 ? <section className='details'><p>Loading songs...</p></section> : null}
       <section className='songs-table'>
         {error ? <p>{error}</p> : null}
 

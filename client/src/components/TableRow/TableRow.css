@@ -1,6 +1,6 @@
 .row {
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   width: fit-content;
   height: 2.75vh;
   border: #101820 0.5px solid;

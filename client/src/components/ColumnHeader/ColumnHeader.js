@@ -14,7 +14,7 @@ function ColumnHeader(props) {
   }
   
   return (
-    <h3 onClick={() => props.handleClick(props.title)} className='column-header cell'>
+    <h3 onClick={() => props.handleClick(props.title)} className='column-header'>
       {props.title} {generateSortIcon()}
     </h3>
   );

@@ -9,17 +9,20 @@
 }
 
 .songs-table {
-  width: 90vw;
-  height: 70vh;
-  margin-bottom: 50px;
+  width: 100vw;
+  height: calc(100vh - 10vh);
   overflow-x: auto;
   overflow-y: auto;
 }
 
 .column-headers {
   display: flex;
-  align-items: center;
+  justify-content: center;
+  align-items: flex-start;
   width: fit-content;
-  height: 3vh;
+  max-height: 2.75vh;
   border: #101820 0.5px solid;
+  position: sticky;
+  top: -1px;
+  z-index: 5;
 }
