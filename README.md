@@ -3,6 +3,31 @@
 ## Setup Instructions
 Follow these instructions to setup the front and backend of this project.
 
+Clone the repository to your local machine:
+```
+git clone https://github.com/danieljrenfro/iheart_tech_challenge.git
+```
+
+Navigate to the server file and install dependencies:
+```
+cd server/ && npm i
+```
+
+Start the server:
+```
+npm start
+```
+
+Navigate to the client file and install dependencies:
+```
+cd ../client/ && npm i
+```
+
+Start the client:
+```
+npm start
+```
+
 ---
 
 This challenge is designed to give us an idea of what point in the code spectrum you're currently on.
