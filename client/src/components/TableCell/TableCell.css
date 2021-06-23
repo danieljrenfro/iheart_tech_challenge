@@ -6,8 +6,29 @@
   font-size: 80%;
 }
 
+.light {
+  background-color: #496682;
+}
+
+.dark {
+  color: #919395;
+  background-color: #274057;
+}
+
 .cell:last-of-type {
   border-right: none;
+}
+
+.cell:first-of-type {
+  position: -webkit-sticky;
+  position: sticky;
+  left: 0px;
+}
+
+.cell:nth-of-type(2) {
+  position: -webkit-sticky;
+  position: sticky;
+  left: 241px;
 }
 
 .cell:first-of-type, 

@@ -2,7 +2,7 @@ import './TableCell.css';
 
 function TableCell(props) {
   return (
-    <p className='cell'>{props.value}</p>
+    <p className={props.style + ' cell'}>{props.value}</p>
   )
 }
 

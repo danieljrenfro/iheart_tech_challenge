@@ -6,14 +6,15 @@ function TableRow(props) {
   let rowCells;
   if (props.song) {
     rowCells = props.columnOrder.map((attribute, i) => {
-      return <TableCell key={i} value={props.song[attribute]}/>
+      return <TableCell 
+        key={i} 
+        value={props.song[attribute]}
+        style={props.line % 2 === 0 ? 'dark' : 'light'}/>
     })
   }
   
   return (
-    <div
-      className={props.line % 2 === 0 ? 'row dark' : 'row light'}
-    >
+    <div className='row'>
       {rowCells}
     </div>
   )
