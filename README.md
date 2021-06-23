@@ -1,5 +1,10 @@
 # iHeartMedia - Music Lab - Code Challenge
 
+## Setup Instructions
+Follow these instructions to setup the front and backend of this project.
+
+---
+
 This challenge is designed to give us an idea of what point in the code spectrum you're currently on.
 There are no tricks, deceptive or complex issues to work through.
 
