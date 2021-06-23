@@ -4,17 +4,22 @@
   align-items: center;
 }
 
-.details > p, li {
+.details > p {
   color: #919395;
 }
 
-.details > ul {
-  margin-bottom: 32px;
+.songs-table {
+  width: 90vw;
+  height: 70vh;
+  margin-bottom: 50px;
+  overflow-x: auto;
+  overflow-y: auto;
 }
 
 .column-headers {
   display: flex;
-  justify-content: center;
-  width: 100%;
+  align-items: center;
+  width: fit-content;
+  height: 3vh;
   border: #101820 0.5px solid;
 }

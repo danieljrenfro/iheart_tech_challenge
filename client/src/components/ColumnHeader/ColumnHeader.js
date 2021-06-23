@@ -10,7 +10,7 @@ function ColumnHeader(props) {
     if (props.title === props.sortBy && props.orderBy === 'desc')
       return <FontAwesomeIcon icon='sort-down'/>
 
-    return <></>;
+    return null;
   }
   
   return (

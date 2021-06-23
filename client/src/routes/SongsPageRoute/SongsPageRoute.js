@@ -60,8 +60,8 @@ function SongsPageRoute() {
     let sortOrder = 'asc';
 
     if (sortBy !== header) setSortBy(header);
-    if (orderBy === 'asc') sortOrder = 'desc';
-    if (orderBy === 'desc') sortOrder = 'no sort';
+    if (orderBy === 'asc' && sortBy === header) sortOrder = 'desc';
+    if (orderBy === 'desc' && sortBy === header) sortOrder = 'no sort';
 
     setOrderBy(sortOrder);
     sortSongs(header, sortOrder);
@@ -99,14 +99,10 @@ function SongsPageRoute() {
       <section className='details'>
         <h2>Songs Page</h2>
         <p>This is the Songs Table, where you can view all of the song data. Clicking the headers of different columns will sort the songs by that column.</p>
-        <ul>
-          <li>Clicking a column once will sort all songs, by that column, in ascending order.</li>
-          <li>A second click on the same column will sort the songs in descending order, by that column.</li>
-          <li>Finally, a third click on a column header will clear the sort.</li>
-        </ul>
+        
+        {songs.length === 0 ? <p>Loading songs...</p> : null}
       </section>
       <section className='songs-table'>
-        {songs.length === 0 ? <p>Loading songs...</p> : null}
         {error ? <p>{error}</p> : null}
 
         <div className="column-headers">

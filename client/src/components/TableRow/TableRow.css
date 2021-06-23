@@ -1,7 +1,7 @@
 .row {
-  width: 100%;
   display: flex;
-  justify-content: center;
+  width: fit-content;
+  height: 2.75vh;
   border: #101820 0.5px solid;
 }
 
@@ -10,7 +10,7 @@
 }
 
 .light {
-  background-color: #496682;;
+  background-color: #496682;
 }
 
 .dark {
