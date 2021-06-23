@@ -20,7 +20,7 @@ npm start
 
 Navigate to the client file and install dependencies:
 ```
-cd ../client/ && npm i
+cd iheart_tech_challenge/client/ && npm i
 ```
 
 Start the client:
